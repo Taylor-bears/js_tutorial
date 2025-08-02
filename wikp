@@ -1,0 +1,26 @@
+#!/usr/bin/node
+
+let urllib = require("urllib");
+let url = process.argv[2];
+const jsdom = require("jsdom");
+const { JSDOM } = jsdom;
+
+urllib.request(url, { followRedirect: true, timeout: 30000 }, function(error, data, response) {
+    let body = data.toString();
+    // 模拟文档对象
+    let { document } = (new JSDOM(body)).window;
+
+    // 获取所有段落和参考文献
+    let paragraphs = document.querySelectorAll("p");
+    let references = document.querySelectorAll(".reference");
+
+    // 删除所有引用
+    references.forEach(function(reference) {
+        reference.remove();
+    });
+
+    // 打印出所有段落
+    paragraphs.forEach(function(paragraph) {
+        console.log(paragraph.textContent);
+    });
+});

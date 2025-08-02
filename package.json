@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "jsdom": "^26.1.0",
     "mhartl-palindrome": "^0.2.3",
     "urllib": "^4.8.0"
   }
